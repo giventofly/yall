@@ -132,4 +132,98 @@ header .links a {
 .examples {
   background-color: #F4F3F2;
 }
+
+.examples .item {
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.examples .item-left {
+  width: 40vw;
+  height: 100%;
+  position: relative;
+}
+
+.examples .item-left img {
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.examples .item-right {
+  height: 100%;
+  width: 60vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.examples .item-right .card {
+  width: 80%;
+  max-width: 600px;
+  height: 80vh;
+  max-height: 700px;
+  padding: 15px;
+  border-radius: 0.3rem;
+  -webkit-box-shadow: 5px 2px 15px rgba(36, 38, 46, 0.4);
+          box-shadow: 5px 2px 15px rgba(36, 38, 46, 0.4);
+}
+
+.examples .item-right .card .image {
+  top: -50px;
+  margin-bottom: 15px;
+  -webkit-box-shadow: 5px 2px 15px rgba(36, 38, 46, 0.4);
+          box-shadow: 5px 2px 15px rgba(36, 38, 46, 0.4);
+  position: relative;
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+  border-radius: 0.3rem;
+}
+
+.examples .item-right .card .image img {
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.examples .item-right .card .info {
+  height: calc(10% + 50px);
+  margin-top: -50px;
+}
+
+.examples .item-right .card .info h3 {
+  color: #8B8CA5;
+}
+
+.examples .item-right .card .info p {
+  color: #2F4360;
+}
 /*# sourceMappingURL=style.css.map */
