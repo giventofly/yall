@@ -1,0 +1,163 @@
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700,900&display=swap');
+
+$font: 'Montserrat Alternates', sans-serif;
+
+
+
+//$maxwidth: 1280px;
+
+$main: #2F4360;
+$darker: #24262E;
+$cta: #5c3548;
+$background: #F4F3F2;
+$lighter: #8B8CA5;
+
+//Media queries
+@mixin mq($point) {
+  $xs: "(min-width : 0px)";
+  $sm: "(max-width : 510px)";
+  $md: "(max-width : 800px)";
+  $lg: "(max-width : 1640px)";
+  $vl: "(min-width : #{$point}px)";
+
+  @if $point==xs {
+    @media #{$xs} {
+      @content;
+    }
+  }
+
+  @else if $point==sm {
+    @media #{$sm} {
+      @content;
+    }
+  }
+
+  @else if $point==md {
+    @media #{$md} {
+      @content;
+    }
+  }
+
+  @else if $point==lg {
+    @media #{$lg} {
+      @content;
+    }
+  }
+  @else {
+    @media #{$vl} {
+       @content;
+    }
+  }
+}
+
+body {
+  overflow-x: hidden;
+  font-family: $font;
+}
+
+*,*:after,*:before {
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  color:$cta;
+  font-weight: 700;
+}
+
+
+::selection {
+  color: $main;
+  background: $background;
+}
+
+
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 25px 75px 25px;
+  flex-direction: column;
+  h1 {
+    color:$darker;
+    font-size: 4rem;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 900;
+  }
+  h3 {
+    color:$main;
+    font-size:1.6rem;
+    margin-bottom: 25px;
+  }
+  p {
+    color:$main;
+    font-size: 1.1rem;
+    max-width: 550px;
+    margin-bottom: 50px;
+    line-height: 1.4;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    
+    a {
+      display: inline-block;
+      background-color: $cta;
+      color:$background;
+      padding: 10px 25px;
+      text-transform: uppercase;
+      font-size: 1rem;
+      margin: 25px;
+      font-weight: 700;
+      border-radius: 0.3rem;
+    }
+  }
+}
+.withmargins {
+  width: 100%;
+  max-width: 1300px;
+  
+  margin: 0 auto;
+}
+
+.documentation {
+  background-color: $lighter;
+  padding: 50px 25px;
+  h2 {
+    background-color: $darker;
+    color:$background;
+    border-radius: 0.3rem;
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 25px 0;
+    max-width: 800px;
+    font-size: 1.2rem;
+  }
+  p {
+    line-height: 1.4;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    max-width: 800px;
+  }
+  pre {
+    padding: 10px;
+    background-color: $main;
+    color:$background;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+.examples {
+  background-color: $background;
+  
+}

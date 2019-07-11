@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="yall - yet another lazyload library">
+  <meta name="keywords" content="yall, javascript, lazy load, lazyload, images">
+  <title>yall - yet another lazyload library</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="yall.min.js"></script>
+  <script>
+    var lazyload = new yall({callback:"log"});
+    lazyload.run();
+
+    function log(a){
+      console.log(`loaded image with src= ${a.src}.`);
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Yall</h1>
+    <h3>yet another lazyload library</h3>
+    <p>Yall is a javascript library (1.5KB minified) that uses intersection observer to lazy load images (or start events on class added) and with the option to use a callback function on every intersection.</p>
+    <div class="links"><a href="">Docs</a><a href="">Examples</a><a href="">github</a></div>
+  </header>
+  <section class="documentation">
+    <div class="withmargins">
+      <h2>What is intersection Observer and why would I want to lazy load images?</h2>
+      <p>From the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API" target="_blank" rel="noopener noffolow" title="mdn">mdn documentation</a>: "The Intersection Observer API provides a way to asynchronously observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.", currently from the information from <a href="https://caniuse.com/#feat=intersectionobserver" target="_blank" rel="nofollow noopener" title="can i use">caniuse</a>, it has a global support of 87.85% and all modern web browsers now support it.</p>
+      <p>Lazy loading images is a best practice to request the assets only when they are indeed to be used, <a href="https://developers.google.com/web/fundamentals/performance/lazy-loading-guidance/images-and-video/" target="_blank" rel="nofollow noopener" title="google developers">google developers</a>  talk about it.</p>
+    
+      <h2>Will this break my site for users in older browsers?</h2>
+      <p>No, in that case it will load all images like lazyload is not present (use the minfied version that is transpilled using babeljs).</p>
+      
+      <h2>And what about browsers that support the loading attribute?</h2>
+      <p>At this moment <a href="https://caniuse.com/#feat=loading-lazy-attr" target="_blank" rel="nofollow noopener" title="can i use support for loading">there is no browser supporting it</a> out of the box, but it also checks for that and make everything ready for it, but if you have other effects based on class change and callbacks you will need to refactor this.</p>
+      
+      <h2>What events can I start or use a callback function?</h2>
+      <p>Since everytime an element is "intersected" a class is added you can use css animations or use a callback function that will receive the element being intersected.</p>
+
+      <h2>I'm ready to go, what do I need to do?</h2>
+
+      <p>You just need to load yall.js and create an instance and make it run - run again if you change the DOM. Elements just need the class "yall_lazy" - you can define your classname, and images need to not have src/srcset and have instead data-src/data-srcset attributes.</p>
+      <p>When an element is intersected the default class yall_loaded is added and the callback function is called.</p>
+
+      <pre>
+&#x3C;script src=&#x22;yall.min.js&#x22;&#x3E;&#x3C;/script&#x3E;
+&#x3C;script&#x3E;
+  var lazyload = new yall();
+  lazyload.run();
+&#x3C;/script&#x3E;
+&#x3C;img class=&#x22;yall_lazy&#x22; data-src=&#x22;link-to-image&#x22;&#x3E;
+&#x3C;div class=&#x22;yall_lazy&#x22;&#x3E;Text that will translate when the class yall_loaded is added.&#x3C;/div&#x3E;</pre>
+
+      <h2>Ok, what are my start options and API?</h2>
+
+  <p>A quick example with a callback function that will put in the console.log the element src after it has been intersected:</p>
+      <pre>
+&#x3C;script&#x3E;
+var lazyload = new yall({callback:&#x22;log&#x22;});
+lazyload.run();
+
+function log(a){
+  console.log(&#x60;loaded image with src= ${a.src}.&#x60;);
+}
+&#x3C;/script&#x3E;</pre>
+
+<p>The only method available after a instance is created is the .run() method that scans elements with the "yall_lazy" class that have not yet the class "yall_loaded".</p>
+
+<p>The options available when you create an instance are:</p>
+<pre>
+  let options = {
+    //elems to search
+    target : "classname", defaults to "yall_lazy"
+    //class to add after being loaded
+    classToLoad : "classname after intersect", defaults to "yall_loaded";
+    //intersectObserver threshold
+    threshold : [0,1], defaults to 0;
+    //root
+    root : element, defaults to null;
+    //rootMargin
+    rootMargin : intersectObserver rootMargin, defaults to "0px 0px 200px 0px";
+    //callback
+    callback : "function", defaults to null;
+    //activate to ignore the attribute loading="lazy" in supported browsers
+    useLoading : bool, defaults to false;
+}
+</pre>
+
+      <h2>This could be added some options for X or Y</h2>
+      <p>Sure it can, I just made it because I needed a simple lazyload js and this fills all my needs. You have other options available for a more robust approach.</p>
+    </div>
+  </section>
+  <section class="examples">
+
+  </section>
+</body>
+</html>
