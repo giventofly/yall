@@ -166,6 +166,14 @@ header {
       height: 100%;
       position: relative;
       z-index: 20;
+      &.yall_lazy {
+        transition: all 2s ease-in-out;
+        transform: translateX(-100%);
+        
+      }
+      &.yall_loaded {
+        transform: translateX(0px);
+      }
       img {
         position: absolute;
         object-fit: cover;
@@ -175,6 +183,14 @@ header {
         left: 0;
         right: 0;
         bottom: 0;
+        &.slowloading.yall_lazy {
+          opacity: 0;
+          transition: all 4s ease-in-out;
+        }
+        &.slowloading.yall_loaded {
+          opacity: 1;
+        }
+        
       }
       @include mq(sm){
         display: none;
@@ -203,7 +219,7 @@ header {
         }
         &.yall_lazy {
           transition: all 3s ease-in-out;
-          transform: translateX(-50vw);
+          transform: translateX(-100vw);
           opacity: 0;
         }
         &.yall_loaded {
