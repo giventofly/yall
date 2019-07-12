@@ -15,7 +15,7 @@ class yall {
     //root
     this.root = document.querySelector(config.root);
     //rootMargin
-    this.rootMargin = config.rootMargin || "0px 0px 200px 0px";
+    this.rootMargin = config.rootMargin || "0px 0px 100px 0px";
     //callback
     this.callback = config.callback || null;
     //activate for loading="lazy" attribute https://caniuse.com/#feat=loading-lazy-attr
@@ -45,7 +45,6 @@ class yall {
     !src ? null : (elem.src = src);
     !srcset ? null : (elem.srcset = srcset);
     elem.classList.add(this.classToLoad);
-    elem.classList.remove(this.target);
     if (this.callback) {
       window[this.callback](elem);
     }
@@ -63,7 +62,6 @@ class yall {
         }
       });
     }, this.options);
-
     [...document.querySelectorAll("." + this.target + ":not(" + "." + this.classToLoad + ")")].forEach(element => {
       yallObserver.observe(element);
     });

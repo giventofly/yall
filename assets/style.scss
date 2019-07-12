@@ -1,18 +1,14 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700,900&display=swap");
 
-
-@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,700,900&display=swap');
-
-$font: 'Montserrat Alternates', sans-serif;
-
-
+$font: "Montserrat Alternates", sans-serif;
 
 //$maxwidth: 1280px;
 
-$main: #2F4360;
-$darker: #24262E;
+$main: #2f4360;
+$darker: #24262e;
 $cta: #5c3548;
-$background: #F4F3F2;
-$lighter: #8B8CA5;
+$background: #f4f3f2;
+$lighter: #8b8ca5;
 
 //Media queries
 @mixin mq($point) {
@@ -26,28 +22,21 @@ $lighter: #8B8CA5;
     @media #{$xs} {
       @content;
     }
-  }
-
-  @else if $point==sm {
+  } @else if $point==sm {
     @media #{$sm} {
       @content;
     }
-  }
-
-  @else if $point==md {
+  } @else if $point==md {
     @media #{$md} {
       @content;
     }
-  }
-
-  @else if $point==lg {
+  } @else if $point==lg {
     @media #{$lg} {
       @content;
     }
-  }
-  @else {
+  } @else {
     @media #{$vl} {
-       @content;
+      @content;
     }
   }
 }
@@ -57,8 +46,10 @@ body {
   font-family: $font;
 }
 
-*,*:after,*:before {
-  margin:0;
+*,
+*:after,
+*:before {
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -66,17 +57,14 @@ body {
 a {
   text-decoration: none;
   display: inline-block;
-  color:$cta;
+  color: $cta;
   font-weight: 700;
 }
-
 
 ::selection {
   color: $main;
   background: $background;
 }
-
-
 
 header {
   display: flex;
@@ -85,47 +73,53 @@ header {
   padding: 50px 25px 75px 25px;
   flex-direction: column;
   h1 {
-    color:$darker;
+    color: $darker;
     font-size: 4rem;
     text-transform: uppercase;
     margin-bottom: 5px;
     font-weight: 900;
   }
   h3 {
-    color:$main;
-    font-size:1.6rem;
+    color: $main;
+    font-size: 1.6rem;
     margin-bottom: 25px;
+    text-align: center;
   }
   p {
-    color:$main;
+    color: $main;
     font-size: 1.1rem;
     max-width: 550px;
     margin-bottom: 50px;
     line-height: 1.4;
+    text-align: center;
   }
   .links {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    
+
     a {
       display: inline-block;
       background-color: $cta;
-      color:$background;
+      color: $background;
       padding: 10px 25px;
       text-transform: uppercase;
       font-size: 1rem;
       margin: 25px;
       font-weight: 700;
       border-radius: 0.3rem;
+      @include mq(sm){
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
     }
   }
 }
 .withmargins {
   width: 100%;
   max-width: 1300px;
-  
+
   margin: 0 auto;
 }
 
@@ -134,7 +128,7 @@ header {
   padding: 50px 25px;
   h2 {
     background-color: $darker;
-    color:$background;
+    color: $background;
     border-radius: 0.3rem;
     padding: 5px 10px;
     display: inline-block;
@@ -151,9 +145,10 @@ header {
   pre {
     padding: 10px;
     background-color: $main;
-    color:$background;
+    color: $background;
     display: block;
     margin-bottom: 10px;
+    overflow-x: scroll;
   }
 }
 
@@ -165,19 +160,24 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    //margin-bottom: 10vh;
     &-left {
       width: 40vw;
       height: 100%;
       position: relative;
+      z-index: 20;
       img {
         position: absolute;
         object-fit: cover;
         height: 100%;
         width: 100%;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      @include mq(sm){
+        display: none;
       }
     }
     &-right {
@@ -186,7 +186,9 @@ header {
       display: flex;
       justify-content: center;
       align-items: center;
-     
+      @include mq(sm){
+        width: 100vw;
+      }
       .card {
         width: 80%;
         max-width: 600px;
@@ -195,38 +197,81 @@ header {
         padding: 15px;
         border-radius: 0.3rem;
         box-shadow: 5px 2px 15px rgba($darker, 0.4);
+        z-index: 10;
+        @include mq(sm){
+          width: 95%;
+        }
+        &.yall_lazy {
+          transition: all 3s ease-in-out;
+          transform: translateX(-50vw);
+          opacity: 0;
+        }
+        &.yall_loaded {
+          transform: translateX(0px);
+          opacity: 1;
+        }
         .image {
-          top:-50px;
+          top: -50px;
           margin-bottom: 15px;
           box-shadow: 5px 2px 15px rgba($darker, 0.4);
           position: relative;
           width: 100%;
-          height: 90%;
+          height: 80%;
           overflow: hidden;
           border-radius: 0.3rem;
+
           img {
             position: absolute;
             object-fit: cover;
             height: 100%;
             width: 100%;
-              top:0;
-              left:0;
-              right:0;
-              bottom:0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            &.slowloading.yall_lazy {
+              opacity: 0;
+              transition: all 4s ease-in-out;
+            }
+            &.slowloading.yall_loaded {
+              opacity: 1;
+            }
           }
         }
         .info {
-          height: calc(10% + 50px);
+          height: calc(20% + 50px);
           margin-top: -50px;
+          @include mq(sm){
+            overflow-y: scroll;
+          }
           h3 {
-            color:$lighter;
+            color: $lighter;
+            text-transform: uppercase;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            @include mq(sm){
+              font-size: 18px;
+            }
           }
           p {
-            color:$main;
+            color: $main;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            @include mq(sm){
+              font-size: 14px;
+            }
+            &.code {
+              //background-color: $cta;
+              color:$darker;
+              font-size: 14px;
+              @include mq(sm){
+                font-size: 12px;
+              }
+            }
           }
         }
       }
-      
     }
   }
 }

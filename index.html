@@ -10,22 +10,24 @@
   <link rel="stylesheet" href="assets/style.css">
   <script src="yall.min.js"></script>
   <script>
-    var lazyload = new yall({callback:"log"});
-    lazyload.run();
-
-    function log(a){
-      console.log(`loaded image with src= ${a.src}.`);
-    }
+     var lazyload = new yall({callback:"log",rootMargin:"0px 0px -100px 0px"});
+      function log(a){
+        console.log(`loaded image with src= ${a.src}.`);
+      }
+    window.addEventListener('DOMContentLoaded', (e) => {
+      lazyload.run();
+    });
+    
   </script>
 </head>
 <body>
   <header>
     <h1>Yall</h1>
     <h3>yet another lazyload library</h3>
-    <p>Yall is a javascript library (1.5KB minified) that uses intersection observer to lazy load images (or start events on class added) and with the option to use a callback function on every intersection.</p>
-    <div class="links"><a href="">Docs</a><a href="">Examples</a><a href="">github</a></div>
+    <p>Yall is a small javascript library (2.47KB) that uses intersection observer to lazy load images (or start events on class added) and with the option to use a callback function on every intersection.</p>
+    <div class="links"><a href="#docs" title="documentation">Docs</a><a href="#examples" title="examples" >Examples</a><a href="https://github.com/giventofly/yall" rel="nofollow noopener" title="github">github</a></div>
   </header>
-  <section class="documentation">
+  <section class="documentation" id="docs">
     <div class="withmargins">
       <h2>What is intersection Observer and why would I want to lazy load images?</h2>
       <p>From the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API" target="_blank" rel="noopener noffolow" title="mdn">mdn documentation</a>: "The Intersection Observer API provides a way to asynchronously observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.", currently from the information from <a href="https://caniuse.com/#feat=intersectionobserver" target="_blank" rel="nofollow noopener" title="can i use">caniuse</a>, it has a global support of 87.85% and all modern web browsers now support it.</p>
@@ -49,22 +51,27 @@
 &#x3C;script src=&#x22;yall.min.js&#x22;&#x3E;&#x3C;/script&#x3E;
 &#x3C;script&#x3E;
   var lazyload = new yall();
-  lazyload.run();
+  window.addEventListener('DOMContentLoaded', (e) => {
+    lazyload.run();
+  });
 &#x3C;/script&#x3E;
 &#x3C;img class=&#x22;yall_lazy&#x22; data-src=&#x22;link-to-image&#x22;&#x3E;
 &#x3C;div class=&#x22;yall_lazy&#x22;&#x3E;Text that will translate when the class yall_loaded is added.&#x3C;/div&#x3E;</pre>
 
       <h2>Ok, what are my start options and API?</h2>
 
-  <p>A quick example with a callback function that will put in the console.log the element src after it has been intersected:</p>
+  <p>A quick example with a callback function that will put output to the browser console the element src after it has been intersected:</p>
       <pre>
 &#x3C;script&#x3E;
 var lazyload = new yall({callback:&#x22;log&#x22;});
-lazyload.run();
 
 function log(a){
   console.log(&#x60;loaded image with src= ${a.src}.&#x60;);
 }
+
+window.addEventListener('DOMContentLoaded', (e) => {
+  lazyload.run();
+});
 &#x3C;/script&#x3E;</pre>
 
 <p>The only method available after a instance is created is the .run() method that scans elements with the "yall_lazy" class that have not yet the class "yall_loaded".</p>
@@ -81,7 +88,7 @@ function log(a){
     //root
     root : element, defaults to null;
     //rootMargin
-    rootMargin : intersectObserver rootMargin, defaults to "0px 0px 200px 0px";
+    rootMargin : intersectObserver rootMargin, defaults to "0px 0px 600px 0px";
     //callback
     callback : "function", defaults to null;
     //activate to ignore the attribute loading="lazy" in supported browsers
@@ -89,17 +96,18 @@ function log(a){
 }
 </pre>
 
-  <h2>This could be added some options for X or Y</h2>
-  <p>Sure it can, I just made it because I needed a simple lazyload js and this fills all my needs. You have other options available for a more robust approach.</p>
+  <h2>Can X or Y be added</h2>
+  <p>Short answer: sure it can. Long answer: I just made this into a library because I only needed a quick working solution with a minimal of options, you can make a pull request or just ask, otherwise you have other options available for a more robust approach.</p>
     
 </div>
   </section>
-  <section class="examples">
+  <section class="examples" id="examples">
+    <!-- lazy loaded normal -->
     <div class="item">
-      <div class="item-left"><img src="https://source.unsplash.com/500x500/?beach,girl" alt=""></div>
+      <div class="item-left"><img class="yall_lazy" data-src="assets/image1.jpg" alt=""></div>
       <div class="item-right">
         <div class="card">
-          <div class="image"><img src="https://source.unsplash.com/500x500/?beach,girl" alt=""></div>
+          <div class="image"><img class="yall_lazy" data-src="assets/image1.jpg" alt=""></div>
           <div class="info">
               <h3>Default behaviour</h3>
               <p>Just and image lazy loaded</p>
@@ -107,7 +115,76 @@ function log(a){
         </div>
       </div>
     </div>
-
+    <!-- effect on image -->
+    <div class="item">
+        <div class="item-left"><img class="yall_lazy slowloading" data-src="assets/image3.jpg" alt=""></div>
+        <div class="item-right">
+          <div class="card">
+            <div class="image"><img class="yall_lazy slowloading" data-src="assets/image3.jpg" alt=""></div>
+            <div class="info">
+                <h3>Class with opacity transition</h3>
+                <p>Just and image lazy loaded</p>
+                <p class="code">img.slowloading.yall_lazy {
+                    opacity: 0;
+                    transition: all 4s ease-in-out;
+                  }
+                  img.slowloading.yall_loaded {
+                    opacity: 1;
+                  }</p>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- lazy applied to .card -->
+      <div class="item">
+          <div class="item-left"><img class="yall_lazy" data-src="assets/image4.jpg" alt=""></div>
+          <div class="item-right">
+            <div class="card yall_lazy">
+              <div class="image"><img class="yall_lazy" data-src="assets/image4.jpg" alt=""></div>
+              <div class="info">
+                  <h3>Applied to an element (.card)</h3>
+                  <p>Translating the element</p>
+                  <p class="code">.card.yall_lazy {
+                      transition: all 3s ease-in-out;
+                      transform: translateX(-50vw);
+                      opacity: 0;
+                    }
+                    .card.yall_loaded {
+                      transform: translateX(0px);
+                      opacity: 1;
+                    }
+                    }</p>
+                </div>
+            </div>
+          </div>
+        </div>
+           <!-- check the log -->
+      <div class="item">
+          <div class="item-left"><img class="yall_lazy" data-src="assets/image5.jpg" alt=""></div>
+          <div class="item-right">
+            <div class="card">
+              <div class="image"><img class="yall_lazy" data-src="assets/image5.jpg" alt=""></div>
+              <div class="info">
+                  <h3>Callback function</h3>
+                  <p>Just check the console :)</p>
+                </div>
+            </div>
+          </div>
+        </div>
+      
+    <!-- lazy loaded normal -->
+    <div class="item">
+        <div class="item-left"><img class="yall_lazy" data-src="assets/image2.jpg" alt=""></div>
+        <div class="item-right">
+          <div class="card">
+            <div class="image"><img class="yall_lazy" data-src="assets/image2.jpg" alt=""></div>
+            <div class="info">
+                <h3>Default behaviour</h3>
+                <p>Just and image lazy loaded</p>
+              </div>
+          </div>
+        </div>
+      </div>
   </section>
 </body>
 </html>
