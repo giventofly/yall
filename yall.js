@@ -32,7 +32,7 @@ class yall {
       (!("loading" in HTMLImageElement.prototype) && this.useLoading)
     ) {
       // load all images
-      [...document.querySelectorAll("." + this.target + ":not(" + "." + this.classToLoad + ")")].forEach(element => {
+      Array.from(document.querySelectorAll("." + this.target + ":not(" + "." + this.classToLoad + ")")).forEach(element => {
         this.loadElem(element);
       });
     }
