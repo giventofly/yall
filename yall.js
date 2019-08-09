@@ -31,6 +31,7 @@ class yall {
       //browser supports loading (and lets assume you are using the attribute loading="lazy")
       (!("loading" in HTMLImageElement.prototype) && this.useLoading)
     ) {
+      this.fsafari = true;
       // load all images
       Array.from(document.querySelectorAll("." + this.target + ":not(" + "." + this.classToLoad + ")")).forEach(element => {
         this.loadElem(element);
@@ -52,6 +53,7 @@ class yall {
 
   /** run observer */
   run() {
+    if(this.safari) { return; }
     const yallObserver = new IntersectionObserver((entries, yallObserver) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) {
