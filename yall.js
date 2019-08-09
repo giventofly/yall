@@ -62,7 +62,7 @@ class yall {
         }
       });
     }, this.options);
-    [...document.querySelectorAll("." + this.target + ":not(" + "." + this.classToLoad + ")")].forEach(element => {
+    Array.from(document.querySelectorAll("." + this.target + ":not(" + "." + this.classToLoad + ")")).forEach(element => {
       yallObserver.observe(element);
     });
   }
