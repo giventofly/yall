@@ -1,6 +1,6 @@
 /**
  * yall - yet another lazyload library using intersection observer
- * @author José Moreira @ <https://github.com/giventofly/pixelit>
+ * @author José Moreira @ <https://github.com/giventofly/yall>
  **/
 
 //lazyload
